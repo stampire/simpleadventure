@@ -23,3 +23,58 @@ Make a folder in the same place as this app (aka your `maker.js` file). Name the
 Recap: You have a folder called `your_game`. Inside are three items, two folders and a file, called `objects`, `scenes`, and `make.json`. 
 
 Put all the scenes you got from Step 1 in the "scenes" folder and all the objects in the "objects" folder.
+
+### Step 3: Make your configuration file
+Open up `make.json` in some text editor like [Sublime Text](https://www.sublimetext.com/). This is where you define all the rules for your game. 
+
+This is a [JSON file](http://www.w3schools.com/json/json_syntax.asp). If you aren't familiar with the format, here are the basics you will need. NOTE: the following is not a complete or accurate description of the JSON format. However, it is all you need to use Simple Adventure:
+ - There are three "types": `object`, `list`, and `string`
+ - A `string` is a collection of `characters`
+    - Characters are anything you can make with your keyboard. These are all characters: abc123[{#@&*`~
+    - A string in JSON is surrounded by quotes, so `"string"` and consist of any character you can make with your keyboard EXCEPT quotes (`"`) and the backslash (`\`).
+        - If you NEED quotes or a backslash in your string, you can use `\"` and `\\`, respectively, and they will be replaced by a double quote symbol and a backslash, respectively.
+    - Here are some examples of `strings`:
+        - `"abc"`
+        - `"1"`
+        - `"I am a string"
+        - `"I have some !@#$%^ crazy symbols"`
+        - `"I have \"quotes\" in me"
+ - A `list` is a collection of any number of the other types
+    - A `list` can have `objects`, `strings` and even other `lists` inside
+    - A `list` in JSON is surrounded by square brackets (`[]`) and the items are separated by commas
+    - Here are some examples of `lists`:
+        - `[]`
+        - `["one item"]`
+        - `["two items", "here's the other one"]`
+        - `["list with lists", ["I'm a sub list", "I'm something else in the sublist"]]`
+- An `object` is like a list, but each item gets a name.
+    - The items in an `object` can be any of the other types, just like `lists`, and the item in an `object` can be another `object`
+    - An `object` is surrounded by curly brackets (`{}`), and the items go "name" + ":" + "value" and are separated by commas.
+    - The "name" MUST be a string and MUST be unique to that object.
+        - an object cannot have items with the same name.
+    - Here are some examples of `objects`:
+        - `{}`
+        - `{"name":"value"}`
+        - `{"I":"am an object", "I have":"two items"}`
+        - `{"colors":["red", "blue", "green"], "fruit":["apple", "orange", "lemon"]}`
+- Spaces, tabs, and newlines do NOT matter unless they are inside of strings.
+    - The following is legal in JSON
+```
+    {
+        "name": "value",
+        "otherName": "otherValue",
+        "list": [
+            "value 1",
+            "value 2",
+            [
+                "sublist",
+                {
+                    "name": "subobject"
+                }
+            ]
+        ]
+    }
+```
+Your file MUST follow the following rules:
+
+ - Your entire file
