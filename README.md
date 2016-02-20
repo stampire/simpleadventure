@@ -81,14 +81,14 @@ with the 'nameofyourgame.html' being your game's name .html. Now, all you have t
 ####The app gave me some scary error message
 If the app gave you some scary error message instead of saying 'Game successfully generated' then you probably did something wrong. Here are some things to try:
     
-    - If you get an error message like
+ - If you get an error message like
 
 ```
-    module.js:453
-        throw err;
-        ^
+module.js:453
+    throw err;
+    ^
 
-    SyntaxError: \path\to\your\game\make.json: Unexpected token
+SyntaxError: \path\to\your\game\make.json: Unexpected token
 ```
 
     Then your `make.json` file is probably incorrect somewhere. This is usually because you forget a comma or have unbalanced square and curly brackets. A good way to figure out where it went wrong is to use [JSONLint](http://jsonlint.com/). Paste your code in there, hit validate, and fix the errors it tells you about until it says "valid json" in green at the bottom.
