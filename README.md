@@ -27,7 +27,24 @@ Put all the scenes you got from Step 1 in the "scenes" folder and all the object
 ### Step 3: Make your configuration file
 Open up `make.json` in some text editor like [Sublime Text](https://www.sublimetext.com/). This is where you define all the rules for your game. 
 
-This is a [JSON file](http://www.w3schools.com/json/json_syntax.asp). If you aren't familiar with the format, here are the basics you will need. NOTE: the following is not a complete or accurate description of the JSON format. However, it is all you need to use Simple Adventure:
+If you do not know what "JSON" means, scroll down to "I don't know what JSON means"
+
+Your file MUST follow the following rules:
+
+ - Your file is one big object. Inside that object are the following:
+    - `title` STRING: what we're going to show on the start page.
+    - `height` STRING: the height of your game. All your scene images should be this height.
+    - `width`STRING:  the width of your game. All your scene images should be this width.
+    - `scenes` LIST: contain only OBJECTS, each representing a scene in your game
+        - Each `scene` is an OBJECT with the following properties:
+            - `id` STRING: a UNIQUE identifier that you will use to reference your scenes.
+            - `type` STRING: this is `"location"` if this is a location, or `"convo"` if this is a conversation
+            - `img` STRING: this is the name of the image that will be used in this scene. If this is a `location`, this is the background image. We will look in your `scenes` folder for a file with this name. If this is a `convo`, then this is the object you are interacting with. The object will be in the center of the screen and the background will be the background of where the object was found but blurred out. We will look in your `objects` folder for a file with this name.
+            - `text` STRING OPTIONAL: This is text that will appear at the top of the screen when the player enters the scene. This is OPTIONAL. If you don't include this property, we will just not show any text.
+            - `objects` LIST: this is a list of the objects in your scene 
+
+## I don't know what JSON means
+[JSON](http://www.w3schools.com/json/json_syntax.asp) is format for laying out data that's easy for computer programs to understand. Computer programs are really good at understanding things that follow very specific rules, so JSON is a format that has very specific rules. You can learn about the format [here](http://www.w3schools.com/json/json_syntax.asp), or you can read the following rules. Note, however, that the following is not a complete or accurate description of the JSON format. Yet, it is all you need to know for Simple Adventure:
  - There are three "types": `object`, `list`, and `string`
  - A `string` is a collection of `characters`
     - Characters are anything you can make with your keyboard. These are all characters: abc123[{#@&*`~
@@ -60,21 +77,18 @@ This is a [JSON file](http://www.w3schools.com/json/json_syntax.asp). If you are
 - Spaces, tabs, and newlines do NOT matter unless they are inside of strings.
     - The following is legal in JSON
 ```
-    {
-        "name": "value",
-        "otherName": "otherValue",
-        "list": [
-            "value 1",
-            "value 2",
-            [
-                "sublist",
-                {
-                    "name": "subobject"
-                }
-            ]
+{
+    "name": "value",
+    "otherName": "otherValue",
+    "list": [
+        "value 1",
+        "value 2",
+        [
+            "sublist",
+            {
+                "name": "subobject"
+            }
         ]
-    }
+    ]
+}
 ```
-Your file MUST follow the following rules:
-
- - Your entire file

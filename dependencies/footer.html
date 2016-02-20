@@ -1,0 +1,38 @@
+
+    </script>
+    <script type="text/javascript">
+        var narrationUp = false;
+        $("#narration").hide();
+        $('#narration').click(function(){
+            console.log("boop");
+            if(narrationUp){
+                $("#narration").css("top", "0px");
+            }
+            else {
+                $("#narration").css("top", "-150px");
+            }
+            narrationUp = !narrationUp;
+        });
+        $("#narration").hide();
+        $("#fullscreen").click(function(){
+            var elem = document.getElementById("body");
+            if(elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if(elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if(elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if(elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else {
+                alert("Sorry, your browser doesn't support fullscreen");
+            }
+        });
+        $("#play").click(function(){
+            $("button").remove();
+            $("h1").remove();
+            play();
+        });
+    </script>
+</body>
+</html>

@@ -1,20 +1,71 @@
 {
     "title": "Sample Adventure!",
-    "height": 1024,
     "width": 1280,
+    "height": 1024,
     "scenes": [
         {
             "id": "room",
             "type": "location",
             "img": "room.jpg",
-            "text": "You are in your home. Kanye West is here.",
+            "text": "You are in your home. Kanye West is here. As awesome as that sounds, you have things you need to do today...",
             "objects": [
                 {
                     "img": "kanye.gif",
-                    "x": 400,
+                    "x": 200,
+                    "y": 250,
+                    "width": 300,
+                    "click": "kanye"
+                },
+                {
+                    "img": "right.png",
+                    "x": 1050,
+                    "y": 400,
+                    "width": 200,
+                    "click": "beach"
+                }
+            ]
+        },
+        {
+            "id": "beach",
+            "type": "location",
+            "img": "beach.jpg",
+            "text": "You end up in a beach somehow.",
+            "objects": [
+                {
+                    "img": "pablo.jpg",
+                    "x": 700,
+                    "y": 700,
+                    "width": 200,
+                    "click": "pablo"
+                },
+                {
+                    "img": "left.png",
+                    "x": 30,
+                    "y": 400,
+                    "width": 200,
+                    "click": "room"
+                }
+            ]
+        },
+        {
+            "id": "pablo",
+            "type": "convo",
+            "img": "pablo.jpg",
+            "objects": [
+                {
+                    "unless": "pablo",
+                    "img": "pablo.jpg",
+                    "x": 800,
+                    "y": 800,
+                    "width": 100,
+                    "click": "pablo"
+                },
+                {
+                    "img": "left.png",
+                    "x": 100,
                     "y": 400,
                     "width": 100,
-                    "click": "kanye"
+                    "click": "room"
                 }
             ]
         },
@@ -34,6 +85,15 @@
                         {
                             "text":"No",
                             "result": "stupid"
+                        },
+                        {
+                            "if": "pablo",
+                            "text":"Hey, is this your album?",
+                            "result": "pablo"
+                        },
+                        {
+                            "text":"*Ignore him*",
+                            "result": "exit"
                         }
                     ]
                 },
@@ -46,40 +106,46 @@
                             "result": "exit"
                         }
                     ]
+                },
+                {
+                    "id": "stupid",
+                    "text": "Are you stupid?!?!?! I'm the greatest rapper OF ALL TIME",
+                    "options": [
+                        {
+                            "text": "ok...",
+                            "result": "begin"
+                        }
+                    ]
+                },
+                {
+                    "id": "pablo",
+                    "text": "THAT'S MY LATEST ALBUM! ISN'T IT AMAZING?!?!",
+                    "options": [
+                        {
+                            "text": "Yeah dude it's genius",
+                            "result": "thanks"
+                        },
+                        {
+                            "text": "I don't know, man, it's not My Beautiful Dark Twisted Fantasy...",
+                            "result": "begin"
+                        },
+                        {
+                            "text":"*Ignore him*",
+                            "result": "exit"
+                        }
+                    ]
+                },
+                {
+                    "id": "thanks",
+                    "text": "Thank you for understanding my processes.",
+                    "options": [
+                        {
+                            "text":"No problem bro",
+                            "result": "exit"
+                        }
+                    ]
                 }
             ]
-
-
-
-            {
-                "text": "I am Kanye West, the greatest rapper of all time. Do you agree?",
-                "options": [
-                    {
-                        "text": "Of course. Haven't you listened to My Beautiful Dark Twisted Fantasy?",
-                        "result": {
-                            "text": "Finally, someone understands",
-                            "options": [
-                                {
-                                    "text": "Leave",
-                                    "result": "exit"
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "text": "No",
-                        "result": {
-                            "text": "Are you stupid?!?! Imma let you try again",
-                            "options": [
-                                {
-                                    "text": "ok",
-                                    "result": 
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
+        }
     ]
 }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sample Adventure!</title>
+    <style type="text/css">
+        #body{
+            position: absolute;
+            top:0px;
+            left:0px;
+            height:100%;
+            width:100%;
+            background-color: #F5F5F5;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            text-align: center;
+        }
+        #stage{
+            position: relative;
+            display: inline-block;
+            background-color: #F5F5F5;
+            background-repeat: no-repeat;
+        }
+        #narration{
+            position: absolute;
+            top:0px;
+            left:20%;
+            width:60%;
+            height:120px;
+            overflow: auto;
+            border-radius: 10px;
+            border: 15px solid #F5F5F5;
+            background-color: #6991AC;
+            color: #F5F5F5;
+            padding:10px;
+            font-size: 35px;
+            -webkit-transition: top .5s; 
+            transition: top .5s;
+            cursor:pointer;
+        }
+        img.object{
+            position: absolute;
+            border: none;
+            cursor: pointer;
+        }
+        h1{
+            margin-top: 25%;
+            font-size: 40px;
+            color: #6991AC;
+        }
+        button{
+            font-size: 30px;
+            display: block;
+            box-shadow: 10px 10px 5px #333333;
+            width:200px;
+            background-color: #D75C37;
+            border: none;
+            border-radius: 5px;
+            margin: 30px auto;
+            padding: 10px;
+            color: #F5F5F5;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="body"><div id="stage"style="width:1280px;height:1280px;background-image:url('./scenes/room.jpg')"><h1>Sample Adventure!</h1>            <button id="play">Play</button>
+            <button id="fullscreen">Fullscreen</button>
+            <div id="narration"></div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="./jquery-2.2.0.min.js"></script>
+    <script type="text/javascript">
+        function cleanup(){
+            $("#stage").find("img").remove();
+        }
+function play() {room()} function room(){cleanup();$('#stage').css('background-image','url("./scenes/room.jpg")');$('#narration').text('You are in your home. Kanye West is here. As awesome as that sounds, you have things you need to do today...');$('#narration').show();$('#narration').css('top', '0px');narrationUp = false;$('<img>').addClass('object').attr('src', './objects/kanye.gif').css({left:200,top:250,width:300,}).click(kanye).appendTo('#stage');$('<img>').addClass('object').attr('src', './objects/right.png').css({left:1050,top:400,width:200,}).click(beach).appendTo('#stage');}function beach(){cleanup();$('#stage').css('background-image','url("./scenes/beach.jpg")');$('#narration').text('You end up in a beach somehow.');$('#narration').show();$('#narration').css('top', '0px');narrationUp = false;$('<img>').addClass('object').attr('src', './objects/pablo.jpg').css({left:700,top:700,width:200,}).click(pablo).appendTo('#stage');$('<img>').addClass('object').attr('src', './objects/left.png').css({left:30,top:400,width:200,}).click(room).appendTo('#stage');}function pablo(){cleanup();$('#stage').css('background-image','url("./scenes/pablo.jpg")');$('#narration').hide();$('<img>').addClass('object').attr('src', './objects/pablo.jpg').css({left:800,top:800,width:100,}).click(pablo).appendTo('#stage');$('<img>').addClass('object').attr('src', './objects/left.png').css({left:100,top:400,width:100,}).click(room).appendTo('#stage');}function kanye(){cleanup();$('#stage').css('background-image','url("./scenes/kanye.gif")');$('#narration').hide();}
+    </script>
+    <script type="text/javascript">
+        var narrationUp = false;
+        $("#narration").hide();
+        $('#narration').click(function(){
+            console.log("boop");
+            if(narrationUp){
+                $("#narration").css("top", "0px");
+            }
+            else {
+                $("#narration").css("top", "-150px");
+            }
+            narrationUp = !narrationUp;
+        });
+        $("#narration").hide();
+        $("#fullscreen").click(function(){
+            var elem = document.getElementById("body");
+            if(elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if(elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if(elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if(elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            } else {
+                alert("Sorry, your browser doesn't support fullscreen");
+            }
+        });
+        $("#play").click(function(){
+            $("button").remove();
+            $("h1").remove();
+            play();
+        });
+    </script>
+</body>
+</html>
