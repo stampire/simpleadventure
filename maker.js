@@ -93,16 +93,17 @@ var processScene = function(scene){
     }
     // Convo mode
     else {
-        var objectHeight = scene.height - 40;
+        var objectHeight = (scene.height || 500) - 40,
+            objectWidth = (scene.width || 500);
         gameScript += "$('#narration').hide();";
         gameScript += "$('<div>').addClass('blur').css('background-image', $('#stage').css('background-image')).appendTo('#stage');"
         gameScript += "$('<img>').addClass('object')";
         gameScript += ".attr('src', './objects/" + scene.img + "')";
-        gameScript += ".css({'cursor':'auto','height':'"+objectHeight+"px','width':'"+scene.width+"px', 'top':'20px', 'left':'"+((width - scene.width)/2)+"px'})";
+        gameScript += ".css({'cursor':'auto','height':'"+objectHeight+"px','width':'"+objectWidth+"px', 'top':'20px', 'left':'"+((width - objectWidth)/2)+"px'})";
         gameScript += ".appendTo('#stage');";
         gameScript += "var ourConvo = $('<div>').addClass('convo')";
                                                 // The 60 is for border/padding
-        gameScript += ".css({'max-height':'"+(height - objectHeight - 60)+"px', 'top':'"+(scene.height)+"px'});"
+        gameScript += ".css({'max-height':'"+(height - objectHeight - 60)+"px', 'top':'"+(scene.height || 500)+"px'});"
         
         var sceneText = scene.text.replace(/\*(.+?)\*/, "<em>$1</em>").replace(/_(.+?)_/, "<strong>$1</strong>");
         gameScript += "ourConvo.append($('<p>').html(\""+ sceneText+"\"));";
