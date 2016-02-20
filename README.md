@@ -80,7 +80,9 @@ with the 'nameofyourgame.html' being your game's name .html. Now, all you have t
 
 ####The app gave me some scary error message
 If the app gave you some scary error message instead of saying 'Game successfully generated' then you probably did something wrong. Here are some things to try:
+    
     - If you get an error message like
+
 ```
 module.js:453
     throw err;
@@ -88,7 +90,15 @@ module.js:453
 
 SyntaxError: \path\to\your\game\make.json: Unexpected token
 ```
+
     Then your `make.json` file is probably incorrect somewhere. This is usually because you forget a comma or have unbalanced square and curly brackets. A good way to figure out where it went wrong is to use [JSONLint](http://jsonlint.com/). Paste your code in there, hit validate, and fix the errors it tells you about until it says "valid json" in green at the bottom.
+    
+    - If you get an error message like 
+
+```No folder supplied```
+    
+    then you did `node maker.js` without putting the name of your game folder.
+
 
 ## I don't know what JSON means
 [JSON](http://www.w3schools.com/json/json_syntax.asp) is format for laying out data that's easy for computer programs to understand. Computer programs are really good at understanding things that follow very specific rules, so JSON is a format that has very specific rules. You can learn about the format [here](http://www.w3schools.com/json/json_syntax.asp), or you can read the following rules. Note, however, that the following is not a complete or accurate description of the JSON format. Yet, it is all you need to know for Simple Adventure:
