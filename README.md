@@ -55,7 +55,39 @@ Your file MUST follow the following rules:
 After all is said and done, your `make.json` file should look something like this:
 ```
 {
-    "title"
+    "title": "My game!",
+    "width": 1920,
+    "height": 1080,
+    "scenes": [
+        {
+            "id": "firstScene",
+            "type": "location",
+            "img": "location.jpg",
+            "text": "Welcome to the game?",
+            "objects": [
+                {
+                    "img": "character.jpg",
+                    "x": 500,
+                    "y": 500,
+                    "width": 200,
+                    "height": 200,
+                    "click": "firstConvo"
+                }
+            ]
+        },
+        {
+            "id": "firstConvo",
+            "type": "convo",
+            "img": "character.jpg",
+            "height": 200,
+            "width": 200,
+            "text": "Hello I'm the character",
+            "options": [
+                "text": "Hello",
+                "result": "firstScene"
+            ]
+        }
+    ]
 }
 ```
 ###Step 4: Generate your game!
