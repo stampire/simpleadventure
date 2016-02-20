@@ -42,7 +42,13 @@ Your file MUST follow the following rules:
             - `img` STRING: this is the name of the image that will be used in this scene. If this is a `location`, this is the background image. We will look in your `scenes` folder for a file with this name. If this is a `convo`, then this is the object you are interacting with. The object will be in the center of the screen and the background will be the background of where the object was found but blurred out. We will look in your `objects` folder for a file with this name.
             - `text` STRING OPTIONAL: This is text that will appear at the top of the screen when the player enters the scene. This is OPTIONAL. If you don't include this property, we will just not show any text.
             - `objects` LIST: this is a list of the objects in your scene 
+###Step 4: Get this app
+You have two options. You can either fork this project on [github](https://github.com/ranneyd/simpleadventure), install [nodejs](https://nodejs.org/en/), then run `maker.js` through node, or you can install this program using [npm](https://www.npmjs.com/package/simpleadventure) by running
+```
+    npm install -g simpleadventure
+```
 
+In either case, you're going to want to copy your game folder into the same directory as `maker.js`. 
 ## I don't know what JSON means
 [JSON](http://www.w3schools.com/json/json_syntax.asp) is format for laying out data that's easy for computer programs to understand. Computer programs are really good at understanding things that follow very specific rules, so JSON is a format that has very specific rules. You can learn about the format [here](http://www.w3schools.com/json/json_syntax.asp), or you can read the following rules. Note, however, that the following is not a complete or accurate description of the JSON format. Yet, it is all you need to know for Simple Adventure:
  - There are three "types": `object`, `list`, and `string`

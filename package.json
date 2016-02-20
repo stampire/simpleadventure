@@ -1,6 +1,7 @@
 {
 	"name": "simpleadventure",
-	"version":"1.0.0",
+	"version":"1.0.2",
 	"email": "dustinpkane@gmail.com",
-	"url":"https://github.com/ranneyd/simpleadventure"
+	"url":"https://github.com/ranneyd/simpleadventure",
+	"bin":"./maker.js"
 }
