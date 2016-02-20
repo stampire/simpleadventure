@@ -33,7 +33,8 @@ Your file MUST follow the following rules:
 
  - Your file is one big object. Inside that object are the following:
     - `title` STRING: what we're going to show on the start page.
-    - `height` STRING: the height of your game. All your scene images should be this height.
+    - `height` STRING: the height of your game in pixels. All your scene images should be this height.
+        - PROTIP: for numbers, you don't actually need the quotes.
     - `width`STRING:  the width of your game. All your scene images should be this width.
     - `scenes` LIST: contain only OBJECTS, each representing a scene in your game
         - Each `scene` is an OBJECT with the following properties:
@@ -43,12 +44,51 @@ Your file MUST follow the following rules:
                 - `img` STRING: this is the name of the image that will be used as the background in this scene. We will look in your `scenes` folder for a file with this name. 
                 - `text` STRING OPTIONAL: This is text that will appear at the top of the screen when the player enters the scene. This is OPTIONAL. If you don't include this property, we will just not show any text.
                 - `objects` LIST: this is a list of the objects in your scene. Each object is an OBJECT containing these values:
+                    - 
             - If it's a `convo`:
                 - `img` STRING: this is an image of the object you are interacting with. The object will be in the center of the screen and the background will be the background of where the object was found but blurred out. We will look in your `objects` folder for a file with this name.
                 - `text` STRING: this text will display at the top of the dialog menu, above the dialog options.
                 - `height` STRING: this is the height of your image. If you do not specify this, the conversation window may not appear in the correct position on the screen.
                 - `width` STRING: this is the width of your image. If you do not specify this, the image may not be centered properly.
                 - `options` LIST: this is the list of dialog options. Each option is an OBJECT.
+
+After all is said and done, your `make.json` file should look something like this:
+```
+{
+    "title"
+}
+```
+###Step 4: Generate your game!
+When you download this app, it will come with a file called `maker.js` and a folder called `dependencies`. Either copy/move your game folder into the same folder as these files, or move these files so they are in the same folder as your game folder. All that matters is `maker.js`, `yourgame`, and `dependencies` are all in the same folder.
+
+Next, open up a shell. On Windows, you can search in start for `cmd`, open up the run command (windows symbol on your keyboard plus 'r') and run `cmd`, or (in Windows 8+) you can hold the Windows key on your keyboard, hit the 'x' key, then hit the 'c' key. On a Mac, you want to go to spotlight and search for 'terminal' or look for it in your apps folder. Once you have that open, copy the location of your `maker.js` file. For me it was `C:\Users\Dustin\Documents\GitHub\simpleadventure`. Next, you're going to type
+
+```
+cd \path\to\your\game
+```
+
+and hit 'enter' (but obviously replace the `\path\to\your\game` with whatever you copied. You should be able to right click and hit 'paste' in the shell). Next, type
+```
+node maker.js nameofyourgame
+```
+and hit 'enter' (but obviously replace 'name of your game' to whatever your game folder is named). It should say 
+
+```
+Game successfully generated as nameofyourgame.html
+```
+with the 'nameofyourgame.html' being your game's name .html. Now, all you have to do is go into your game folder and open that .html file in a web browser of your choice (but if you want the best results, use Google Chrome version 48 or later, since that's the only browser it has been thoroughly tested in). 
+
+####The app gave me some scary error message
+If the app gave you some scary error message instead of saying 'Game successfully generated' then you probably did something wrong. Here are some things to try:
+    - If you get an error message like
+```
+module.js:453
+    throw err;
+    ^
+
+SyntaxError: \path\to\your\game\make.json: Unexpected token
+```
+    Then your `make.json` file is probably incorrect somewhere. This is usually because you forget a comma or have unbalanced square and curly brackets. A good way to figure out where it went wrong is to use [JSONLint](http://jsonlint.com/). Paste your code in there, hit validate, and fix the errors it tells you about until it says "valid json" in green at the bottom.
 
 ## I don't know what JSON means
 [JSON](http://www.w3schools.com/json/json_syntax.asp) is format for laying out data that's easy for computer programs to understand. Computer programs are really good at understanding things that follow very specific rules, so JSON is a format that has very specific rules. You can learn about the format [here](http://www.w3schools.com/json/json_syntax.asp), or you can read the following rules. Note, however, that the following is not a complete or accurate description of the JSON format. Yet, it is all you need to know for Simple Adventure:
