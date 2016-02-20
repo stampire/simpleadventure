@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 
 var folder;
@@ -23,7 +25,7 @@ var writeOut = function(output){
         if(err) {
             return console.log(err);
         }
-        console.log("The file was saved!");
+        console.log("Game successfully generated as " + name + ".html");
     }); 
 };
 
@@ -54,10 +56,10 @@ var processScene = function(scene){
     if(scene.type === "location") {
         gameScript += "$('#stage').css('background-image','url(\"./scenes/"+scene.img+"\")');"
         if (scene.text) {
-            gameScript += "$('#narration').text('" + scene.text + "');"
+            var sceneText = scene.text.replace(/\*(.+?)\*/, "<em>$1</em>").replace(/_(.+?)_/, "<strong>$1</strong>");
+            gameScript += "$('#narration').html('" + sceneText + "');";
+            gameScript += "narrationRollDown();";
             gameScript += "$('#narration').show();";
-            gameScript += "$('#narration').css('top', '0px');"
-            gameScript += "narrationUp = false;"
         }
         else {
             gameScript += "$('#narration').hide();";
@@ -65,20 +67,34 @@ var processScene = function(scene){
 
         for( var i in scene.objects ){
             var obj = scene.objects[i];
+            if (obj.if) {
+                gameScript += "if(stateBools['"+obj.if+"']){";
+            }
+            if (obj.unless) {
+                gameScript += "if(!stateBools['"+obj.unless+"']){";
+            }
             gameScript += "$('<img>').addClass('object').attr('src', './objects/" + obj.img + "')";
             gameScript += ".css({" + (obj.x?"left:" + obj.x + ",":"")
                                    + (obj.y?"top:" + obj.y + ",":"")
                                    + (obj.width?"width:" + obj.width + ",":"") 
                                    + (obj.height?"height:" + obj.height + ",":"") 
                             +"})";
+            if (obj.setTrue){
+                gameScript += ".click(function(){stateBools['"+obj.setTrue+"'] = true;})"
+            }
+            if (obj.setFalse){
+                gameScript += ".click(function(){stateBools['"+obj.setFalse+"'] = false;})"
+            }
             gameScript += ".click("+obj.click+").appendTo('#stage');";
+            if (obj.if || obj.unless) {
+                gameScript += "}";
+            }
         }
     }
     // Convo mode
     else {
         var objectHeight = scene.height - 40;
         gameScript += "$('#narration').hide();";
-        //gameScript += "$('#stage').css('background-image','url(\"./scenes/"+scene.background+"\")')";
         gameScript += "$('<div>').addClass('blur').css('background-image', $('#stage').css('background-image')).appendTo('#stage');"
         gameScript += "$('<img>').addClass('object')";
         gameScript += ".attr('src', './objects/" + scene.img + "')";
@@ -87,11 +103,32 @@ var processScene = function(scene){
         gameScript += "var ourConvo = $('<div>').addClass('convo')";
                                                 // The 60 is for border/padding
         gameScript += ".css({'max-height':'"+(height - objectHeight - 60)+"px', 'top':'"+(scene.height)+"px'});"
-        gameScript += "ourConvo.append($('<p>').html(\""+ scene.text+"\"));";
+        
+        var sceneText = scene.text.replace(/\*(.+?)\*/, "<em>$1</em>").replace(/_(.+?)_/, "<strong>$1</strong>");
+        gameScript += "ourConvo.append($('<p>').html(\""+ sceneText+"\"));";
         gameScript += "var ourList = $('<ol>');";
         for(var i in scene.options){
             var option = scene.options[i];
-            gameScript += "ourList.append($('<li>').html(\""+option.text+"\").click("+option.result+"));";
+            if (option.if) {
+                gameScript += "if(stateBools['"+option.if+"']){";
+            }
+            if (option.unless) {
+                gameScript += "if(!stateBools['"+option.unless+"']){";
+            }
+
+            var optionText = option.text.replace(/\*(.+?)\*/, "<em>$1</em>").replace(/_(.+?)_/, "<strong>$1</strong>");
+            gameScript += "ourList.append($('<li>').html(\""+optionText+"\")";
+            if (option.setTrue){
+                gameScript += ".click(function(){stateBools['"+option.setTrue+"'] = true;})"
+            }
+            if (option.setFalse){
+                gameScript += ".click(function(){stateBools['"+option.setFalse+"'] = false;})"
+            }
+            gameScript += ".click("+option.result+"));";
+            if (option.if || option.unless) {
+                gameScript += "}";
+            }
+
         }
         gameScript += "ourList.appendTo(ourConvo);"
         gameScript += "ourConvo.appendTo('#stage');";

@@ -7,7 +7,7 @@
             "id": "room",
             "type": "location",
             "img": "room.jpg",
-            "text": "You are in your home. Kanye West is here. As awesome as that sounds, you have things you need to do today...",
+            "text": "You are in your home. _Kanye West_ is here. As awesome as that sounds, you have things you need to do today...",
             "objects": [
                 {
                     "img": "kanye.gif",
@@ -103,7 +103,7 @@
             "text": "Finally, someone understands",
             "options": [
                 {
-                    "text": "leave",
+                    "text": "Leave",
                     "result": "room"
                 }
             ]
@@ -114,7 +114,7 @@
             "img": "kanye.gif",
             "height": 543,
             "width": 402,
-            "text": "Are you stupid?!?!?! I'm the greatest rapper OF ALL TIME",
+            "text": "Are you stupid?!?!?! I'm the greatest rapper _OF ALL TIME_",
             "options": [
                 {
                     "text": "ok...",

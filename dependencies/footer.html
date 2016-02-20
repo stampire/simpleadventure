@@ -2,18 +2,25 @@
     </script>
     <script type="text/javascript">
         var narrationUp = false;
-        $("#narration").hide();
         $('#narration').click(function(){
-            console.log("boop");
             if(narrationUp){
-                $("#narration").css("top", "0px");
+                narrationRollDown();
             }
             else {
-                $("#narration").css("top", "-150px");
+                narrationRollUp();
             }
-            narrationUp = !narrationUp;
         });
         $("#narration").hide();
+
+        function narrationRollUp(){
+            $("#narration").css("top", "-150px");
+            narrationUp = true;
+        }
+        function narrationRollDown(){
+            $("#narration").css("top", "0px");
+            narrationUp = false;
+        }
+
         $("#fullscreen").click(function(){
             var elem = document.getElementById("body");
             if(elem.requestFullscreen) {
