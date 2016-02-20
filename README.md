@@ -37,20 +37,26 @@ Your file MUST follow the following rules:
         - PROTIP: for numbers, you don't actually need the quotes.
     - `width`STRING:  the width of your game. All your scene images should be this width.
     - `scenes` LIST: contain only OBJECTS, each representing a scene in your game
-        - Each `scene` is an OBJECT with the following properties:
-            - `id` STRING: a UNIQUE identifier that you will use to reference your scenes.
-            - `type` STRING: this is `"location"` if this is a location, or `"convo"` if this is a conversation
-            - If it's a `location`:
-                - `img` STRING: this is the name of the image that will be used as the background in this scene. We will look in your `scenes` folder for a file with this name. 
-                - `text` STRING OPTIONAL: This is text that will appear at the top of the screen when the player enters the scene. This is OPTIONAL. If you don't include this property, we will just not show any text.
-                - `objects` LIST: this is a list of the objects in your scene. Each object is an OBJECT containing these values:
-                    - 
-            - If it's a `convo`:
-                - `img` STRING: this is an image of the object you are interacting with. The object will be in the center of the screen and the background will be the background of where the object was found but blurred out. We will look in your `objects` folder for a file with this name.
-                - `text` STRING: this text will display at the top of the dialog menu, above the dialog options.
-                - `height` STRING: this is the height of your image. If you do not specify this, the conversation window may not appear in the correct position on the screen.
-                - `width` STRING: this is the width of your image. If you do not specify this, the image may not be centered properly.
-                - `options` LIST: this is the list of dialog options. Each option is an OBJECT.
+- Scene objects look like this
+    - `id` STRING: a UNIQUE identifier that you will use to reference your scenes.
+    - `type` STRING: this is `"location"` if this is a location, or `"convo"` if this is a conversation
+    - If it's a `location`:
+        - `img` STRING: this is the name of the image that will be used as the background in this scene. We will look in your `scenes` folder for a file with this name. 
+        - `text` STRING OPTIONAL: This is text that will appear at the top of the screen when the player enters the scene. This is OPTIONAL. If you don't include this property, we will just not show any text.
+        - `objects` LIST: this is a list of the objects in your scene.
+    - If it's a `convo`:
+        - `img` STRING: this is an image of the object you are interacting with. The object will be in the center of the screen and the background will be the background of where the object was found but blurred out. We will look in your `objects` folder for a file with this name.
+        - `text` STRING: this text will display at the top of the dialog menu, above the dialog options.
+        - `height` STRING: this is the height of your image. If you do not specify this, the conversation window may not appear in the correct position on the screen.
+        - `width` STRING: this is the width of your image. If you do not specify this, the image may not be centered properly.
+        - `options` LIST: this is the list of dialog options. Each option is an OBJECT.
+- Object objects in scenes look like this:
+    - `img`STRING: name of the image for this object. We will look for it in your "objects" folder
+    - `x` STRING: distance, in pixels, from the LEFT side of the stage.
+    - `y` STRING: distance, in pixels, from the TOP side of the stage (different that on a normal graph, where it's distance from the bottom).
+    - `width` STRING: width, in pixels, of the object. If you don't give it a width, but you give it a height, it will set the height and make the width whatever it needs to be to maintain the same aspect ratio. If neither a height or width is specified, the image will not be resized.
+    - `height` STRING: see width above, but replace height with width and width with height.
+    - `click` STRING: the ID 
 
 After all is said and done, your `make.json` file should look something like this:
 ```
