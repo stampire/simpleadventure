@@ -33,7 +33,6 @@ var config      = require("./" + name + "/make.json"),
     width       = config.width || 1280,
     height      = config.height || 1024, 
     scenes      = config.scenes,
-    stateBools  = {},
     header      = readFile("./dependencies/header.html"),
     uppermiddle = readFile("./dependencies/uppermiddle.html"),
     lowermiddle = readFile("./dependencies/lowermiddle.html"),
@@ -42,7 +41,7 @@ var config      = require("./" + name + "/make.json"),
 
 var stageAndTitle = '<div id="stage"'
                         + 'style="width:'+ width +'px;'
-                        + 'height:' + width + 'px;'
+                        + 'height:' + height + 'px;'
                         + 'background-image:url(\'./scenes/' + scenes[0].img + '\')'
                         + '"><h1>'+config.title+'</h1>';
 
@@ -50,20 +49,22 @@ var stageAndTitle = '<div id="stage"'
 var processScene = function(scene){
     gameScript += "function " + scene.id + "(){";
     gameScript += "cleanup();"
-    gameScript += "$('#stage').css('background-image','url(\"./scenes/"+scene.img+"\")');"
-    if (scene.text) {
-        gameScript += "$('#narration').text('" + scene.text + "');"
-        gameScript += "$('#narration').show();";
-        gameScript += "$('#narration').css('top', '0px');"
-        gameScript += "narrationUp = false;"
-    }
-    else {
-        gameScript += "$('#narration').hide();";
-    }
 
-    for( var i in scene.objects ){
-        var obj = scene.objects[i];
-        if( (!obj.if || stateBools[obj.if]) && (!obj.unless || !stateBools[obj.unless])){
+    // location mode
+    if(scene.type === "location") {
+        gameScript += "$('#stage').css('background-image','url(\"./scenes/"+scene.img+"\")');"
+        if (scene.text) {
+            gameScript += "$('#narration').text('" + scene.text + "');"
+            gameScript += "$('#narration').show();";
+            gameScript += "$('#narration').css('top', '0px');"
+            gameScript += "narrationUp = false;"
+        }
+        else {
+            gameScript += "$('#narration').hide();";
+        }
+
+        for( var i in scene.objects ){
+            var obj = scene.objects[i];
             gameScript += "$('<img>').addClass('object').attr('src', './objects/" + obj.img + "')";
             gameScript += ".css({" + (obj.x?"left:" + obj.x + ",":"")
                                    + (obj.y?"top:" + obj.y + ",":"")
@@ -72,13 +73,34 @@ var processScene = function(scene){
                             +"})";
             gameScript += ".click("+obj.click+").appendTo('#stage');";
         }
-
+    }
+    // Convo mode
+    else {
+        var objectHeight = scene.height - 40;
+        gameScript += "$('#narration').hide();";
+        //gameScript += "$('#stage').css('background-image','url(\"./scenes/"+scene.background+"\")')";
+        gameScript += "$('<div>').addClass('blur').css('background-image', $('#stage').css('background-image')).appendTo('#stage');"
+        gameScript += "$('<img>').addClass('object')";
+        gameScript += ".attr('src', './objects/" + scene.img + "')";
+        gameScript += ".css({'cursor':'auto','height':'"+objectHeight+"px','width':'"+scene.width+"px', 'top':'20px', 'left':'"+((width - scene.width)/2)+"px'})";
+        gameScript += ".appendTo('#stage');";
+        gameScript += "var ourConvo = $('<div>').addClass('convo')";
+                                                // The 60 is for border/padding
+        gameScript += ".css({'max-height':'"+(height - objectHeight - 60)+"px', 'top':'"+(scene.height)+"px'});"
+        gameScript += "ourConvo.append($('<p>').html(\""+ scene.text+"\"));";
+        gameScript += "var ourList = $('<ol>');";
+        for(var i in scene.options){
+            var option = scene.options[i];
+            gameScript += "ourList.append($('<li>').html(\""+option.text+"\").click("+option.result+"));";
+        }
+        gameScript += "ourList.appendTo(ourConvo);"
+        gameScript += "ourConvo.appendTo('#stage');";
     }
 
     gameScript += "}";
 }
 
-var gameScript = "function play() {";
+var gameScript = "var stateBools = {}; function play() {";
 gameScript += scenes[0].id + "()";
 gameScript += "} ";
 
