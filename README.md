@@ -91,7 +91,7 @@ module.js:453
 SyntaxError: \path\to\your\game\make.json: Unexpected token
 ```
 
-    Then your `make.json` file is probably incorrect somewhere. This is usually because you forget a comma or have unbalanced square and curly brackets. A good way to figure out where it went wrong is to use [JSONLint](http://jsonlint.com/). Paste your code in there, hit validate, and fix the errors it tells you about until it says "valid json" in green at the bottom.
+Then your `make.json` file is probably incorrect somewhere. This is usually because you forget a comma or have unbalanced square and curly brackets. A good way to figure out where it went wrong is to use [JSONLint](http://jsonlint.com/). Paste your code in there, hit validate, and fix the errors it tells you about until it says "valid json" in green at the bottom.
     
     - If you get an error message like 
 
