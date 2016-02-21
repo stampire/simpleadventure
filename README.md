@@ -8,6 +8,8 @@ For instance, you can have a simple haunted house. You begin in a room with some
 
 ## How do I do it?
 
+Check out [this tutorial](tutorial.md).
+
 ### Step 1: Get Art
 Collect a bunch of image files to use in your game. You are going to need backgrounds, or "scenes", and characters, or "objects". 
 
