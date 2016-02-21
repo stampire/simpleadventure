@@ -56,7 +56,11 @@ Your file MUST follow the following rules:
     - `y` STRING: distance, in pixels, from the TOP side of the stage (different that on a normal graph, where it's distance from the bottom).
     - `width` STRING: width, in pixels, of the object. If you don't give it a width, but you give it a height, it will set the height and make the width whatever it needs to be to maintain the same aspect ratio. If neither a height or width is specified, the image will not be resized.
     - `height` STRING: see width above, but replace height with width and width with height.
-    - `click` STRING: the ID 
+    - `click` STRING: the ID of the scene that will be triggered when this object is clicked on.
+    - 'setTrue` STRING OPTIONAL: sets the given variable to true. You shouldn't use this in conjunction with `setFalse`
+    - `setFalse` STRING OPTIONAL: sets the given variable to false. You shouldn't use this in conjunction with `setTrue`
+    - `if` STRING OPTIONAL: this object will only appear if the variable specified here is true. Should not be used in conjunction with `unless`.
+    - `unless` STRING OPTIONAL: this object will not show up if the specified variable is true. Should not be used in conjunction with `if`.
 
 After all is said and done, your `make.json` file should look something like this:
 ```
