@@ -1,12 +1,14 @@
 {
-    "title": "Sample Adventure!",
+    "title": "Sample Kanye Adventure!",
     "width": 1280,
     "height": 1024,
+    "music": "kanye.mp3",
     "scenes": [
         {
             "id": "room",
             "type": "location",
             "img": "room.jpg",
+            "music": "kanye.mp3",
             "text": "You are in your home. _Kanye West_ is here. As awesome as that sounds, you have things you need to do today...",
             "objects": [
                 {
@@ -73,6 +75,7 @@
             "img": "kanye.gif",
             "height": 543,
             "width": 402,
+            "music": "skinhead.mp3",
             "text": "I am Kanye West, the greatest rapper of all time. Do you agree?",
             "options": [
                 {

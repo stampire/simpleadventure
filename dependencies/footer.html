@@ -2,6 +2,7 @@
     </script>
     <script type="text/javascript">
         var narrationUp = false;
+        var musicOn = true;
         $('#narration').click(function(){
             if(narrationUp){
                 narrationRollDown();
@@ -39,6 +40,16 @@
             $("button").remove();
             $("h1").remove();
             play();
+        });
+        $("#music").click(function(){
+            // JQuery is this shitty at html5 audio
+            var music = document.getElementById("audio");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+            musicOn = !musicOn;
         });
     </script>
 </body>
