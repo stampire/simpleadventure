@@ -28,48 +28,6 @@
             ]
         },
         {
-            "id": "beach",
-            "type": "location",
-            "img": "beach.jpg",
-            "text": "You end up in a beach somehow.",
-            "objects": [
-                {
-                    "unless": "pablo",
-                    "img": "pablo.jpg",
-                    "x": 700,
-                    "y": 700,
-                    "width": 200,
-                    "click": "pablo"
-                },
-                {
-                    "img": "left.png",
-                    "x": 30,
-                    "y": 400,
-                    "width": 200,
-                    "click": "room"
-                }
-            ]
-        },
-        {
-            "id": "pablo",
-            "type": "convo",
-            "img": "pablo.jpg",
-            "height": 500,
-            "width": 500,
-            "text": "It's Kanye's new album, \"The Life of Pablo\". What do you do with it?",
-            "options": [
-                {
-                    "text": "Take it",
-                    "setTrue": "pablo",
-                    "result": "beach"
-                },
-                {
-                    "text":"Leave it",
-                    "result": "beach"
-                }  
-            ]
-        },
-        {
             "id": "kanyeBegin",
             "type": "convo",
             "img": "kanye.gif",
@@ -159,6 +117,48 @@
                     "text":"No problem bro",
                     "result": "room"
                 }
+            ]
+        },
+        {
+            "id": "beach",
+            "type": "location",
+            "img": "beach.jpg",
+            "text": "You end up in a beach somehow.",
+            "objects": [
+                {
+                    "unless": "pablo",
+                    "img": "pablo.jpg",
+                    "x": 700,
+                    "y": 700,
+                    "width": 200,
+                    "click": "pablo"
+                },
+                {
+                    "img": "left.png",
+                    "x": 30,
+                    "y": 400,
+                    "width": 200,
+                    "click": "room"
+                }
+            ]
+        },
+        {
+            "id": "pablo",
+            "type": "convo",
+            "img": "pablo.jpg",
+            "height": 500,
+            "width": 500,
+            "text": "It's Kanye's new album, \"The Life of Pablo\". What do you do with it?",
+            "options": [
+                {
+                    "text": "Take it",
+                    "setTrue": "pablo",
+                    "result": "beach"
+                },
+                {
+                    "text":"Leave it",
+                    "result": "beach"
+                }  
             ]
         }
     ]
