@@ -41,6 +41,11 @@ var config      = require("./" + name + "/make.json"),
     footer      = readFile("./dependencies/footer.html");
 
 
+var music = "";
+if(config.music){
+    music = "<audio id='audio' autoplay loop src='./music/"+config.music+"' style='display:none'></audio>"
+}
+
 var stageAndTitle = '<div id="stage"'
                         + 'style="width:'+ width +'px;'
                         + 'height:' + height + 'px;'
@@ -51,6 +56,18 @@ var stageAndTitle = '<div id="stage"'
 var processScene = function(scene){
     gameScript += "function " + scene.id + "(){";
     gameScript += "cleanup();"
+
+    if (scene.music){
+        var musicLocation = "./music/" +  scene.music;
+        gameScript += "if(musicOn && $('audio').attr('src') !== '"+musicLocation+"'){";
+        gameScript += "$('audio').attr('src','"+musicLocation+"')";
+        gameScript += "document.getElementById('audio').play()";
+        gameScript += "}";
+    }
+
+    if(scene.music === ""){
+        gameScript += "document.getElementById('audio').pause()";
+    }
 
     // location mode
     if(scene.type === "location") {
@@ -150,4 +167,4 @@ for(var scene in scenes){
 fs.createReadStream('./dependencies/jquery-2.2.0.min.js')
     .pipe(fs.createWriteStream('./' + name + '/jquery-2.2.0.min.js'));
 
-writeOut(header + config.title + uppermiddle + stageAndTitle + lowermiddle + gameScript + footer);
+writeOut(header + config.title + uppermiddle + music + stageAndTitle + lowermiddle + gameScript + footer);
