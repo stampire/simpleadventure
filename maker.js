@@ -61,7 +61,12 @@ var processScene = function(scene){
         var musicLocation = "./music/" +  scene.music;
         gameScript += "if(musicOn && $('audio').attr('src') !== '"+musicLocation+"'){";
         gameScript += "$('audio').attr('src','"+musicLocation+"')";
+        gameScript += "document.getElementById('audio').play()";
         gameScript += "}";
+    }
+
+    if(scene.music === ""){
+        gameScript += "document.getElementById('audio').pause()";
     }
 
     // location mode
